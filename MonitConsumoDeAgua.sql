@@ -1,0 +1,124 @@
+CREATE DATABASE MonitoramentoConsumoDeAgua;
+
+use MonitoramentoConsumoDeAgua;
+
+create table Endereco (
+	cep varchar(8) primary key,
+    rua varchar(255),
+    bairro varchar(255),
+    cidade varchar(255),
+    estado varchar(255)
+);
+
+create table Imovel (
+	cod_imovel int primary key auto_increment,
+    tipo_imovel varchar(100),
+    cep_endereco varchar(8),
+    constraint fk_imovel_endereco 
+    foreign key (cep_endereco) references Endereco(cep)
+    on update cascade
+    on delete set null
+);
+
+create table Hidrometro (
+	num_serie_hidrometro varchar(50) primary key,
+    marca varchar(100),
+    modelo varchar (100)
+);
+
+create table Usuario (
+	cod_usuario int primary key auto_increment,
+    nome varchar(255) not null,
+    email varchar(255) unique,
+    data_cadastro datetime,
+    tipo_p varchar(255)
+);
+
+create table Pessoa_Fisica (
+	cod_usuario int primary key,
+    cpf char(11) unique not null,
+    data_nasc date not null,
+    constraint fk_pf_usuario 
+    foreign key (cod_usuario) references Usuario(cod_usuario)
+    on update cascade
+    on delete cascade
+);
+
+create table Pessoa_Juridica (
+	cod_usuario int primary key,
+    cnpj varchar(14) unique not null,
+    razao_social varchar(200) not null,
+    constraint fk_pj_usuario
+    foreign key (cod_usuario) references Usuario(cod_usuario)
+    on update cascade
+    on delete cascade
+);
+
+create table Contrato (
+	cod_contrato int primary key auto_increment,
+    cod_usuario int not null,
+    cod_imovel int not null,
+    num_serie_hidrometro varchar(50) not null,
+    data_inicio datetime,
+    status varchar(50),
+    constraint fk_contrato_usuario
+    foreign key (cod_usuario) references Usuario(cod_usuario)
+    on update cascade
+    on delete restrict,
+	constraint fk_contrato_imovel
+    foreign key (cod_imovel) references Imovel(cod_imovel)
+    on update cascade
+    on delete restrict,
+    constraint fk_contrato_hidrometro
+    foreign key (num_serie_hidrometro) references Hidrometro(num_serie_hidrometro)
+    on update cascade
+    on delete restrict
+);
+
+create table Leitura (
+	cod_leitura int primary key auto_increment,
+    valor_medido decimal(10,3) not null,
+    data_hora_leitura datetime not null,
+    num_serie_hidrometro varchar(50) not null,
+    constraint fk_leitura_hidrometro
+    foreign key (num_serie_hidrometro) references Hidrometro(num_serie_hidrometro)
+    on update cascade
+    on delete restrict
+);
+
+create table Alerta (
+	cod_alerta int primary key auto_increment,
+    data_hora_alerta datetime not null,
+    tipo_alerta varchar(100) not null,
+    cod_leitura int not null,
+    constraint fk_alerta_leitura
+    foreign key(cod_leitura) references Leitura(cod_leitura)
+    on update cascade
+    on delete restrict
+);
+
+CREATE TABLE Grupo (
+    cod_grupo INT PRIMARY KEY AUTO_INCREMENT,
+    nome_grupo VARCHAR(100) NOT NULL UNIQUE,
+    descricao TEXT
+);
+INSERT INTO Grupo (nome_grupo, descricao)
+VALUES 
+('Técnico', 'Usuários responsáveis pela instalação, manutenção e monitoramento dos sistemas de medição.'),
+('Cliente', 'Usuários consumidores que consultam seu consumo e relatórios.');
+CREATE TABLE Grupos_Usuarios (
+    cod_usuario INT NOT NULL,
+    cod_grupo INT NOT NULL,
+    data_entrada DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (cod_usuario, cod_grupo),
+    CONSTRAINT fk_grupousu_usuario
+        FOREIGN KEY (cod_usuario) REFERENCES Usuario(cod_usuario)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT fk_grupousu_grupo
+        FOREIGN KEY (cod_grupo) REFERENCES Grupo(cod_grupo)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+);
