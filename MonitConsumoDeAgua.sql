@@ -11,7 +11,7 @@ create table Endereco (
 );
 
 create table Imovel (
-	cod_imovel int primary key auto_increment,
+	cod_imovel int primary key,
     tipo_imovel varchar(100),
     cep_endereco varchar(8),
     constraint fk_imovel_endereco 
@@ -27,7 +27,7 @@ create table Hidrometro (
 );
 
 create table Usuario (
-	cod_usuario int primary key auto_increment,
+	cod_usuario int primary key,
     nome varchar(255) not null,
     email varchar(255) unique,
     data_cadastro datetime,
@@ -55,7 +55,7 @@ create table Pessoa_Juridica (
 );
 
 create table Contrato (
-	cod_contrato int primary key auto_increment,
+	cod_contrato int primary key,
     cod_usuario int not null,
     cod_imovel int not null,
     num_serie_hidrometro varchar(50) not null,
@@ -76,7 +76,7 @@ create table Contrato (
 );
 
 create table Leitura (
-	cod_leitura int primary key auto_increment,
+	cod_leitura int primary key,
     valor_medido decimal(10,3) not null,
     data_hora_leitura datetime not null,
     num_serie_hidrometro varchar(50) not null,
@@ -87,7 +87,7 @@ create table Leitura (
 );
 
 create table Alerta (
-	cod_alerta int primary key auto_increment,
+	cod_alerta int primary key,
     data_hora_alerta datetime not null,
     tipo_alerta varchar(100) not null,
     cod_leitura int not null,
@@ -98,7 +98,7 @@ create table Alerta (
 );
 
 CREATE TABLE Grupo (
-    cod_grupo INT PRIMARY KEY AUTO_INCREMENT,
+    cod_grupo INT PRIMARY KEY auto_increment,
     nome_grupo VARCHAR(100) NOT NULL UNIQUE,
     descricao TEXT
 );
@@ -119,6 +119,4 @@ CREATE TABLE Grupos_Usuarios (
         FOREIGN KEY (cod_grupo) REFERENCES Grupo(cod_grupo)
         ON UPDATE CASCADE
         ON DELETE CASCADE
-);
-
 );
