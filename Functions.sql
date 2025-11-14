@@ -1,12 +1,13 @@
 DELIMITER $$
--- gereaçao de id
-CREATE FUNCTION gerar_id(tipo_prefixo VARCHAR(5), tamanho INT) RETURNS VARCHAR(255)
+CREATE FUNCTION gerar_id(tipo_prefixo VARCHAR(5), tamanho INT) 
+RETURNS VARCHAR(255)
 DETERMINISTIC
 BEGIN
     DECLARE chars_str VARCHAR(62) DEFAULT 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    DECLARE result_str VARCHAR(255) DEFAULT tipo_prefixo;
+    DECLARE result_str VARCHAR(255) DEFAULT '';
     DECLARE i INT DEFAULT 0;
     DECLARE rand_index INT;
+    DECLARE prefixo VARCHAR(255) DEFAULT CONCAT(tipo_prefixo, '_');
 
     WHILE i < tamanho DO
         SET rand_index = FLOOR(1 + (RAND() * 62));
@@ -14,14 +15,11 @@ BEGIN
         SET i = i + 1;
     END WHILE;
 
-    RETURN result_str;
-END $$
-
+    RETURN CONCAT(prefixo, result_str);
+END$$
 DELIMITER ;
 
-
 -- calcular consumo medio
-
 DELIMITER $$
 
 CREATE FUNCTION consumo_medio_usuario(p_cod_usuario INT) RETURNS DECIMAL(10,3)

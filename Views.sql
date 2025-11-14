@@ -1,6 +1,5 @@
 USE MonitoramentoConsumoDeAgua;
 CREATE USER 'user_cliente'@'localhost' identified by 'senha_user';
-
 CREATE VIEW vw_leituras_por_usuario AS
 SELECT
 	u.nome,

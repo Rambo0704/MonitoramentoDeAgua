@@ -11,7 +11,7 @@ create table Endereco (
 );
 
 create table Imovel (
-	cod_imovel int primary key,
+	cod_imovel varchar(20) primary key,
     tipo_imovel varchar(100),
     cep_endereco varchar(8),
     constraint fk_imovel_endereco 
@@ -27,15 +27,16 @@ create table Hidrometro (
 );
 
 create table Usuario (
-	cod_usuario int primary key,
+	cod_usuario varchar(20) primary key,
     nome varchar(255) not null,
+    senha varchar (100) unique not null,
     email varchar(255) unique,
     data_cadastro datetime,
     tipo_p varchar(255)
 );
 
 create table Pessoa_Fisica (
-	cod_usuario int primary key,
+	cod_usuario varchar(20) primary key,
     cpf char(11) unique not null,
     data_nasc date not null,
     constraint fk_pf_usuario 
@@ -45,7 +46,7 @@ create table Pessoa_Fisica (
 );
 
 create table Pessoa_Juridica (
-	cod_usuario int primary key,
+	cod_usuario varchar(20) primary key,
     cnpj varchar(14) unique not null,
     razao_social varchar(200) not null,
     constraint fk_pj_usuario
@@ -56,8 +57,8 @@ create table Pessoa_Juridica (
 
 create table Contrato (
 	cod_contrato int primary key,
-    cod_usuario int not null,
-    cod_imovel int not null,
+    cod_usuario varchar(20) not null,
+    cod_imovel varchar(20) not null,
     num_serie_hidrometro varchar(50) not null,
     data_inicio datetime,
     status varchar(50),
@@ -102,12 +103,13 @@ CREATE TABLE Grupo (
     nome_grupo VARCHAR(100) NOT NULL UNIQUE,
     descricao TEXT
 );
-INSERT INTO Grupo (nome_grupo, descricao)
+INSERT INTO Grupo (nome_grupo, descricao) -- preenchendo a tabela grupo pois ela sera estatica, somente para relacionar com usuarios por meio do Grupos_Usuarios
 VALUES 
 ('Técnico', 'Usuários responsáveis pela instalação, manutenção e monitoramento dos sistemas de medição.'),
 ('Cliente', 'Usuários consumidores que consultam seu consumo e relatórios.');
+
 CREATE TABLE Grupos_Usuarios (
-    cod_usuario INT NOT NULL,
+    cod_usuario varchar(20) NOT NULL,
     cod_grupo INT NOT NULL,
     data_entrada DATETIME DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (cod_usuario, cod_grupo),
@@ -120,3 +122,15 @@ CREATE TABLE Grupos_Usuarios (
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+-- Fazendo o Insert do Primeiro Tecnico
+SET @id := gerar_id('U', 10);
+
+INSERT INTO Usuario (cod_usuario, nome, senha, email, tipo_p)
+VALUES (@id, 'Tecnico Master', '$2a$10$yQKq4Y3cuwvFyGqgZnYcBOuJkQ4gvz3wJx6ywOqVvJh3HrDyc.0yS', 'tecnico@agua.com', 'FISICA'); -- 123
+
+INSERT INTO Pessoa_Fisica (cod_usuario, cpf, data_nasc)
+VALUES (@id, '00000000000', '1990-01-01');
+
+INSERT INTO Grupos_Usuarios (cod_usuario, cod_grupo)
+VALUES (@id, 1);
