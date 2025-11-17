@@ -27,7 +27,7 @@ FOR EACH ROW
 BEGIN
     IF NEW.valor_medido > 500 THEN
         INSERT INTO Alerta (cod_alerta,tipo_alerta, cod_leitura)
-        VALUES (gerar_id(A,10),'Consumo alto detectado', NEW.cod_leitura);
+        VALUES (gerar_id('A',10),'Consumo alto detectado', NEW.cod_leitura);
     END IF;
 END;
 //
@@ -38,7 +38,7 @@ FOR EACH ROW
 BEGIN
     IF NEW.valor_medido < 0 THEN
         INSERT INTO Alerta (cod_alerta,tipo_alerta, cod_leitura)
-        VALUES (gerar_id(A,10),'Leitura inválida', NEW.cod_leitura);
+        VALUES (gerar_id('A',10),'Leitura inválida', NEW.cod_leitura);
     END IF;
 END;
 //

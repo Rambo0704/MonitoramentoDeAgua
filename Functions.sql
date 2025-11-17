@@ -21,6 +21,7 @@ DELIMITER ;
 
 -- calcular consumo medio
 DELIMITER $$
+DELIMITER $$
 
 CREATE FUNCTION consumo_medio_usuario(p_cod_usuario VARCHAR(20)) RETURNS DECIMAL(10,3)
 DETERMINISTIC
@@ -71,8 +72,8 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Hidrometro não existe';
     ELSE
     
-        INSERT INTO Contrato (cod_usuario, cod_imovel, num_serie_hidrometro, data_inicio, status)
-        VALUES (p_cod_usuario, p_cod_imovel, p_num_serie_hidrometro, p_data_inicio, p_status);
+        INSERT INTO Contrato (cod_contrato,cod_usuario, cod_imovel, num_serie_hidrometro, data_inicio, status)
+        VALUES (gerar_id('C',10),p_cod_usuario, p_cod_imovel, p_num_serie_hidrometro, p_data_inicio, p_status);
     END IF;
 END $$
 

@@ -56,7 +56,7 @@ create table Pessoa_Juridica (
 );
 
 create table Contrato (
-	cod_contrato int primary key,
+	cod_contrato varchar(20) primary key,
     cod_usuario varchar(20) not null,
     cod_imovel varchar(20) not null,
     num_serie_hidrometro varchar(50) not null,
