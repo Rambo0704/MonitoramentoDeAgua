@@ -77,7 +77,7 @@ create table Contrato (
 );
 
 create table Leitura (
-	cod_leitura int primary key,
+	cod_leitura varchar(20) primary key,
     valor_medido decimal(10,3) not null,
     data_hora_leitura datetime not null,
     num_serie_hidrometro varchar(50) not null,
