@@ -22,7 +22,7 @@ DELIMITER ;
 -- calcular consumo medio
 DELIMITER $$
 
-CREATE FUNCTION consumo_medio_usuario(p_cod_usuario INT) RETURNS DECIMAL(10,3)
+CREATE FUNCTION consumo_medio_usuario(p_cod_usuario VARCHAR(20)) RETURNS DECIMAL(10,3)
 DETERMINISTIC
 BEGIN
     DECLARE hidrometro_usuario VARCHAR(50);
@@ -47,8 +47,8 @@ DELIMITER ;
 DELIMITER $$
 
 CREATE PROCEDURE criar_contrato(
-    IN p_cod_usuario INT,
-    IN p_cod_imovel INT,
+    IN p_cod_usuario VARCHAR(20),
+    IN p_cod_imovel VARCHAR(20),
     IN p_num_serie_hidrometro VARCHAR(50),
     IN p_data_inicio DATETIME,
     IN p_status VARCHAR(50)

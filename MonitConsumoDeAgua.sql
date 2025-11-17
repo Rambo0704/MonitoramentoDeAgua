@@ -88,7 +88,7 @@ create table Leitura (
 );
 
 create table Alerta (
-	cod_alerta int primary key,
+	cod_alerta VARCHAR(10) primary key,
     data_hora_alerta datetime not null,
     tipo_alerta varchar(100) not null,
     cod_leitura int not null,
@@ -127,8 +127,7 @@ CREATE TABLE Grupos_Usuarios (
 SET @id := gerar_id('U', 10);
 
 INSERT INTO Usuario (cod_usuario, nome, senha, email, tipo_p)
-VALUES (@id, 'Tecnico Master', '$2a$10$yQKq4Y3cuwvFyGqgZnYcBOuJkQ4gvz3wJx6ywOqVvJh3HrDyc.0yS', 'tecnico@agua.com', 'FISICA'); -- 123
-
+VALUES (@id, 'Tecnico Master', '123', 'tecnico@agua.com', 'FISICA');
 INSERT INTO Pessoa_Fisica (cod_usuario, cpf, data_nasc)
 VALUES (@id, '00000000000', '1990-01-01');
 
