@@ -88,10 +88,10 @@ create table Leitura (
 );
 
 create table Alerta (
-	cod_alerta VARCHAR(10) primary key,
+	cod_alerta VARCHAR(20) primary key,
     data_hora_alerta datetime not null,
     tipo_alerta varchar(100) not null,
-    cod_leitura int not null,
+    cod_leitura varchar(20) not null,
     constraint fk_alerta_leitura
     foreign key(cod_leitura) references Leitura(cod_leitura)
     on update cascade
