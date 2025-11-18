@@ -29,7 +29,7 @@ create table Hidrometro (
 create table Usuario (
 	cod_usuario varchar(20) primary key,
     nome varchar(255) not null,
-    senha varchar (100) unique not null,
+    senha varchar (100) not null,
     email varchar(255) unique,
     data_cadastro datetime,
     tipo_p varchar(255)
