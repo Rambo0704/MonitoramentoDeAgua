@@ -46,6 +46,13 @@ GRANT SELECT ON MonitoramentoConsumoDeAgua.vw_alertas_usuario TO 'user_cliente'@
 
 CREATE USER 'user_tecnico'@'localhost' identified by 'senha_forte';
 GRANT SELECT, INSERT, UPDATE, DELETE ON MonitoramentoConsumoDeAgua.* TO 'user_tecnico'@'localhost';
+GRANT EXECUTE ON FUNCTION monitoramentoconsumodeagua.gerar_id TO 'user_tecnico'@'localhost';
+GRANT EXECUTE ON FUNCTION monitoramentoconsumodeagua.consumo_medio_usuario TO 'user_tecnico'@'localhost';
+GRANT EXECUTE ON PROCEDURE monitoramentoconsumodeagua.criar_contrato TO 'user_tecnico'@'localhost';
+FLUSH PRIVILEGES;
+
+
+
 
 
 
