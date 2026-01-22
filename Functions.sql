@@ -1,3 +1,4 @@
+ -- gerar id unico e aleatorio
 DELIMITER $$
 CREATE FUNCTION gerar_id(tipo_prefixo VARCHAR(5), tamanho INT) 
 RETURNS VARCHAR(255)

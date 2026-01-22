@@ -1,6 +1,5 @@
 USE monitoramentoconsumodeagua;
-
-CREATE INDEX idx_imovel_cep ON imovel(cep_endereco);
+-- indices para otimizar consultas
 
 CREATE INDEX idx_contrato_usuario ON Contrato(cod_usuario);
 CREATE INDEX idx_contrato_imovel ON Contrato(cod_imovel);
