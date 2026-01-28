@@ -4,7 +4,7 @@
 
 Este projeto consiste na **modelagem e implementação de um banco de dados relacional em SQL** para o monitoramento de consumo de água. O objetivo é registrar leituras de consumo, garantir a integridade dos dados e disponibilizar consultas e relatórios que auxiliem na análise do uso de água ao longo do tempo.
 
-O projeto foi desenvolvido com foco em **boas práticas de banco de dados**, aplicando regras de negócio diretamente no SGBD.
+O projeto foi desenvolvido com foco em **boas práticas de banco de dados**, aplicando regras de negócio diretamente no SGBD, reduzindo dependência da camada de aplicação e aumentando a confiabilidade dos dados.
 
 ---
 
@@ -12,22 +12,25 @@ O projeto foi desenvolvido com foco em **boas práticas de banco de dados**, apl
 
 * Modelar um banco de dados para controle de consumo de água
 * Garantir integridade e consistência dos dados
-* Automatizar validações e cálculos no banco
+* Automatizar validações, cálculos e alertas no banco
 * Facilitar a geração de relatórios de consumo
+* Aplicar conceitos de segurança e controle de acesso
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
 * **SQL**
-* Conceitos de banco de dados relacional
+* Banco de dados relacional (MySQL)
+* Conceitos de modelagem relacional
 * Recursos avançados de SQL:
-
   * Views
   * Functions
   * Triggers
+  * Stored Procedures
   * Índices
   * Chaves primárias e estrangeiras
+  * Controle de usuários e permissões
 
 ---
 
@@ -35,11 +38,13 @@ O projeto foi desenvolvido com foco em **boas práticas de banco de dados**, apl
 
 O banco de dados é composto por tabelas responsáveis por armazenar:
 
-* Informações dos consumidores
-* Registros de leituras de consumo
-* Dados necessários para cálculo e análise do uso de água
+* Usuários do sistema
+* Imóveis e contratos
+* Hidrômetros
+* Leituras de consumo
+* Alertas automáticos de inconsistência ou consumo elevado
 
-A modelagem foi pensada para evitar redundâncias e garantir consistência através de relacionamentos bem definidos.
+A modelagem foi pensada para **evitar redundâncias**, manter **integridade referencial** e garantir **consistência dos dados** por meio de relacionamentos bem definidos.
 
 ---
 
@@ -49,74 +54,77 @@ A modelagem foi pensada para evitar redundâncias e garantir consistência atrav
 
 * Estruturação das entidades principais do sistema
 * Uso de chaves primárias e estrangeiras
+* Relacionamentos normalizados
+
+---
 
 ### ✔️ Views
 
 * Criação de *views* para facilitar consultas e relatórios
 * Abstração de consultas complexas
+* Apoio à análise de consumo ao longo do tempo
+
+---
 
 ### ✔️ Functions
 
-* Funções SQL para cálculos automáticos
-* Centralização de regras de negócio no banco
+* Função para **geração automática de identificadores únicos (IDs)** com prefixo e caracteres aleatórios
+* Função para cálculo de **consumo médio por usuário**
+* Centralização de regras de negócio diretamente no banco
+
+---
+
+### ✔️ Stored Procedures
+
+* Procedure para **criação de contratos**, validando:
+  * Existência do usuário
+  * Existência do hidrômetro
+* Tratamento de erros utilizando `SIGNAL`
+
+---
 
 ### ✔️ Triggers
 
-* Validação automática de dados na inserção e atualização
-* Identificação de **consumo inválido** (valores negativos ou incoerentes)
-* Detecção automática de **consumo excessivo/anormal**, permitindo sinalização de leituras fora do padrão esperado
-* **Geração automática de identificadores (IDs)** para garantir unicidade dos registros e evitar conflitos de inserção
+* Preenchimento automático de datas de cadastro e leitura
+* Atualização automática de timestamps
+* Detecção de **consumo inválido** (valores negativos)
+* Detecção automática de **consumo elevado/anormal**
+* Geração automática de **alertas** ao identificar inconsistências
 * Prevenção de dados inconsistentes no banco
+
+---
 
 ### ✔️ Índices
 
 * Otimização de consultas frequentes
+* Melhoria de desempenho em operações de leitura
 
 ---
 
-## 📊 Exemplos de Consultas
+### ✔️ Usuários e Permissões
 
-Alguns exemplos de análises que podem ser realizadas com o banco:
-
-* Consumo total por consumidor
-* Consumo médio em determinado período
-* Comparação de consumo entre meses
-
-Essas consultas podem ser utilizadas para gerar relatórios e apoiar tomadas de decisão.
+* Criação de usuários no SGBD
+* Definição de permissões específicas por tipo de usuário
+* Controle de acesso às tabelas, views e operações
+* Aplicação do princípio do **menor privilégio**
+* Garantia de segurança e separação de responsabilidades no banco de dados
 
 ---
 
-## 🚀 Como Utilizar
+## 📊 Exemplos de Análises Possíveis
 
-1. Clone este repositório:
+Com este banco de dados, é possível realizar análises como:
 
-```bash
-git clone https://github.com/Rambo0704/MonitoramentoDeAgua.git
-```
+* Consumo total por usuário
+* Consumo médio por período
+* Identificação de padrões de consumo
+* Detecção de leituras fora do padrão esperado
+* Monitoramento automático de situações anômalas
 
-2. Execute o script SQL no seu SGBD de preferência (MySQL ou PostgreSQL):
-
-```sql
-MonitConsumoDeAgua.sql
-```
-
-3. Utilize as *views* e *functions* para realizar consultas e análises.
+Essas análises podem ser utilizadas para **relatórios**, **auditorias** e **tomada de decisão**.
 
 ---
 
-## 📚 Aprendizados
-
-Com este projeto foi possível reforçar conhecimentos em:
-
-* Modelagem de banco de dados
-* SQL avançado
-* Regras de negócio no banco
-* Organização e documentação de projetos
-
----
-
-
----
 ## Diagrama
 <img width="2613" height="1774" alt="mermaid-diagram-2026-01-28-155508" src="https://github.com/user-attachments/assets/1a55c345-457b-435b-9a69-0f9ee2784a6d" />
 
