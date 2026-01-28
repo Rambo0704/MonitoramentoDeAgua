@@ -65,6 +65,7 @@ A modelagem foi pensada para evitar redundâncias e garantir consistência atrav
 * Validação automática de dados na inserção e atualização
 * Identificação de **consumo inválido** (valores negativos ou incoerentes)
 * Detecção automática de **consumo excessivo/anormal**, permitindo sinalização de leituras fora do padrão esperado
+* **Geração automática de identificadores (IDs)** para garantir unicidade dos registros e evitar conflitos de inserção
 * Prevenção de dados inconsistentes no banco
 
 ### ✔️ Índices
