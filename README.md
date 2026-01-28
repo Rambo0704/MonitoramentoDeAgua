@@ -116,5 +116,6 @@ Com este projeto foi possível reforçar conhecimentos em:
 
 
 ---
+## Diagrama
+<img width="2613" height="1774" alt="mermaid-diagram-2026-01-28-155508" src="https://github.com/user-attachments/assets/1a55c345-457b-435b-9a69-0f9ee2784a6d" />
 
-💡 *Projeto desenvolvido com fins educacionais e para demonstração de habilidades em SQL.*
