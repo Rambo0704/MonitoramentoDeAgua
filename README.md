@@ -124,6 +124,17 @@ Com este banco de dados, é possível realizar análises como:
 Essas análises podem ser utilizadas para **relatórios**, **auditorias** e **tomada de decisão**.
 
 ---
+## 🏙️ Cenário de Uso
+
+Este banco de dados pode ser utilizado por:
+* Companhias de saneamento
+* Condomínios residenciais
+* Sistemas públicos de controle de consumo
+* Plataformas de monitoramento ambiental
+
+O foco é garantir confiabilidade dos dados, detectar anomalias automaticamente e fornecer base sólida para análises e decisões operacionais.
+
+---
 
 ## Diagrama
 <img width="2613" height="1774" alt="mermaid-diagram-2026-01-28-155508" src="https://github.com/user-attachments/assets/1a55c345-457b-435b-9a69-0f9ee2784a6d" />
